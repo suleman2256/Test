@@ -11,4 +11,5 @@ public interface PersonService {
 
     List<Person> findPersonAll();
 
+    List<Person> findPersonByLastName();
 }

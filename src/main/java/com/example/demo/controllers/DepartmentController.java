@@ -23,5 +23,4 @@ public class DepartmentController {
     public List<Department> allDepartments() {
         return departmentService.findDepartmentAll();
     }
-
 }

@@ -27,4 +27,9 @@ public class PersonController {
         return personService.findPersonAll();
     }
 
+    @GetMapping("/person/lastname")
+    public List<Person> byLastName() {
+        return personService.findPersonByLastName();
+    }
+
 }
