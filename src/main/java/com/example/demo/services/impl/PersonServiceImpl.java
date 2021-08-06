@@ -6,6 +6,7 @@ import com.example.demo.services.interfaces.PersonService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -17,12 +18,18 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> findPersonAll() {
+    public List<Person> findAllPerson() {
         return personRepository.findAll();
     }
 
     @Override
-    public List<Person> findPersonByLastName() {
-        return personRepository.findByLastName("Smirnov");
+    public List<Person> findPersonByLastName(String lastName) {
+        return personRepository.findPersonByLastName(lastName);
     }
+
+    @Override
+    public Optional<Person> findById(Long id) {
+        return personRepository.findById(id);
+    }
+
 }

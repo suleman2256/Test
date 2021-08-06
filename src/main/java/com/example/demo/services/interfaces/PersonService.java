@@ -4,12 +4,15 @@ import com.example.demo.entities.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface PersonService {
 
 
-    List<Person> findPersonAll();
+    List<Person> findAllPerson();
 
-    List<Person> findPersonByLastName();
+    List<Person> findPersonByLastName(String lastName);
+
+    Optional<Person> findById(Long id);
 }
