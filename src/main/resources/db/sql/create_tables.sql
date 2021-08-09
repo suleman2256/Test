@@ -1,5 +1,4 @@
-
---changeset Departments_sql
+--changeset: Departments_sql
 CREATE TABLE Departments (
                              id BIGINT PRIMARY KEY NOT NULL,
                              full_name VARCHAR (2048),
@@ -8,7 +7,7 @@ CREATE TABLE Departments (
 
 );
 
---changeset Person_sql
+--changeset: Person_sql
 CREATE TABLE Persons (
                          id BIGINT PRIMARY KEY NOT NULL,
                          first_name VARCHAR (2048),
