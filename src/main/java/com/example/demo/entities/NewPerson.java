@@ -1,22 +1,20 @@
 package com.example.demo.entities;
 
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 @ToString
 @Table(name = "Persons", schema = "public")
-public class Person {
+public class NewPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,4 +40,5 @@ public class Person {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Department department;
+
 }

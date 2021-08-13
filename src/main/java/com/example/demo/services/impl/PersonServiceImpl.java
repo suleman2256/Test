@@ -3,6 +3,8 @@ package com.example.demo.services.impl;
 import com.example.demo.entities.Person;
 import com.example.demo.repositories.PersonRepository;
 import com.example.demo.services.interfaces.PersonService;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +37,4 @@ public class PersonServiceImpl implements PersonService {
     public Person findPersonByFirstName(String firstName) {
         return personRepository.findPersonByFirstName(firstName);
     }
-
 }

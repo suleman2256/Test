@@ -1,11 +1,14 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.NewPerson;
 import com.example.demo.entities.Person;
+import com.example.demo.services.interfaces.NewPersonService;
 import com.example.demo.services.interfaces.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,7 @@ import java.util.List;
 public class PersonController {
 
     private final PersonService personService;
+    private final NewPersonService newPersonService;
 
     @GetMapping("persons")
     @Operation(summary = "Все сотрудники", description = "Позволяет вывести всех сотрудников")
