@@ -24,6 +24,22 @@ public class PersonController {
     private final PersonService personService;
     private final NewPersonService newPersonService;
 
+    @PostMapping(value = "persons/add", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @Operation(summary = "Добавить сотрудника", description = "Позволяет добавить сотрудника")
+    public NewPerson sendAndSave(@RequestBody NewPerson newPerson) {
+        newPersonService.addNewPerson(newPerson);
+        newPersonService.send(newPerson);
+        return newPerson;
+    }
+
+    @PostMapping("persons/delete/{id}")
+    @Operation(summary = "Удалить сотрудника", description = "Позволяет удалить сотрудника по его id")
+    public Person delete(@PathVariable Long id) {
+        Person person = personService.findById(id);
+        personService.delete(id);
+        return person;
+    }
+
     @GetMapping("persons")
     @Operation(summary = "Все сотрудники", description = "Позволяет вывести всех сотрудников")
     public List<Person> findAllPerson() {

@@ -4,8 +4,9 @@ CREATE TABLE Departments (
                              full_name VARCHAR (2048),
                              short_name VARCHAR (2048),
                              phone_number VARCHAR (2048)
-
 );
+
+ALTER TABLE Departments OWNER TO postgres;
 
 --changeset: Person_sql
 CREATE TABLE Persons (
@@ -14,6 +15,8 @@ CREATE TABLE Persons (
                          last_name VARCHAR (2048),
                          patronymic VARCHAR (2048),
                          date DATE,
-                         department_id BIGINT,
-                         FOREIGN KEY (department_id) REFERENCES Departments(id)
+                         department_id BIGINT NOT NULL,
+                         FOREIGN KEY(department_id) REFERENCES Departments(id)
 );
+
+ALTER TABLE Persons OWNER TO postgres;

@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,8 +16,9 @@ import java.util.Date;
 public class NewPerson {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
+    @SequenceGenerator(name = "entity_id_seq", sequenceName = "global_id_sequence", allocationSize = 1)
+    @Column(name = "id", unique = true, updatable = false, nullable = false)
     @Parameter(description = "Индетификатор сотрудника")
     private Long id;
 
@@ -38,7 +38,7 @@ public class NewPerson {
     @Parameter(description = "Дата рождения сотрудника")
     private Date date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Department department;
-
 }
+

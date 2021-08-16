@@ -18,4 +18,5 @@ public interface PersonService {
 
     Person findPersonByFirstName(String firstName);
 
+    void delete(Long id);
 }

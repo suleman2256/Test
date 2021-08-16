@@ -2,24 +2,25 @@ package com.example.demo.entities;
 
 
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 
 import javax.persistence.*;
 
-@Data
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @ToString
 @Table(name = "Departments", schema = "public")
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entity_id_seq")
+    @SequenceGenerator(name = "entity_id_seq", sequenceName = "global_id_sequence", allocationSize = 1)
+    @Column(name = "id", unique = true, updatable = false, nullable = false)
     @Parameter(description = "Идентификатор подразделения")
     private Long id;
 
