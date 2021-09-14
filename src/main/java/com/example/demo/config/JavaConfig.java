@@ -1,5 +1,10 @@
 package com.example.demo.config;
 
+import com.example.demo.calculator.Add;
+import com.example.demo.calculator.AddResponse;
+import com.example.demo.calculator.Calculator;
+import com.example.demo.entities.Department;
+import com.example.demo.entities.Person;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,5 +58,30 @@ public class JavaConfig {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Bean
+    public AddResponse addResponse() {
+        return new AddResponse();
+    }
+
+    @Bean
+    public Add add() {
+        return new Add();
+    }
+
+    @Bean
+    public Calculator calculator() {
+        return new Calculator();
+    }
+
+    @Bean
+    public Person person() {
+        return new Person();
+    }
+
+    @Bean
+    public Department department() {
+        return new Department();
     }
 }

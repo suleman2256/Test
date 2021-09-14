@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -36,7 +39,11 @@ public class NewPerson {
 
     @Column(name = "date")
     @Parameter(description = "Дата рождения сотрудника")
-    private Date date;
+    private LocalDate date;
+
+    @Column(name = "Month_Salary")
+    @Parameter(description = "Зарплата в месяц")
+    private int monthSalary;
 
     @OneToOne
     private Department department;

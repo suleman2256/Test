@@ -14,7 +14,8 @@ CREATE TABLE Persons (
                          first_name VARCHAR (2048),
                          last_name VARCHAR (2048),
                          patronymic VARCHAR (2048),
-                         date DATE,
+                         date date,
+                         month_salary numeric,
                          department_id BIGINT NOT NULL,
                          FOREIGN KEY(department_id) REFERENCES Departments(id)
 );

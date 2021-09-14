@@ -11,4 +11,6 @@ public interface DepartmentService {
     List<Department> findDepartmentAll();
 
     Department findById(Long id);
+
+    String getSumMonthSalary(Long id);
 }

@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -31,7 +35,7 @@ public class Person {
     private String firstName;
 
     @Column(name = "last_name")
-    @Parameter(description = "Фамилия сотрудника")
+    @Parameter(description = "Фамилия сотрудника", name = "Фамилия сотрудника")
     private String lastName;
 
     @Column(name = "patronymic")
@@ -39,8 +43,12 @@ public class Person {
     private String patronymic;
 
     @Column(name = "date")
-    @Parameter(description = "Дата рождения сотрудника")
-    private Date date;
+    @Parameter(description = "Дата рождения сотрудника", name = "Дата рождения сотрудника")
+    private LocalDate date;
+
+    @Column(name = "month_salary")
+    @Parameter(description = "Зарплата в месяц")
+    private int monthSalary;
 
     @OneToOne
     private Department department;

@@ -2,18 +2,17 @@ package com.example.demo.entities;
 
 
 import io.swagger.v3.oas.annotations.Parameter;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 
-@Getter
-@Setter
+@Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
 @Table(name = "Departments", schema = "public")
 public class Department {
 
@@ -35,4 +34,6 @@ public class Department {
     @Column(name = "phone_number")
     @Parameter(description = "Контактные данные подразделения")
     private String phoneNumber;
+
+    private Integer result;
 }
