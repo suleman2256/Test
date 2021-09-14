@@ -1,33 +1,35 @@
 version: '3.8'
 
 services:
-  postgres:
-    build:
-      context: services/postgres
-      dockerfile: Dockerfile.development
+  db:
+    image: 'postgres:12-alpine'
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
     volumes:
       - "db-data:/var/lib/postgresql/data"
+
   app:
+    container_name: app
     build:
       context: services/app
-      dockerfile: Dockerfile.development
-
+      dockerfile: Dockerfile
     environment:
-      - PORT=8091
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO = update
     image: 'my-java-app'
     ports:
       - "8091:8091"
     depends_on:
-      - postgres
+      - db
 
   zookeeper:
+    container_name: zookeeper
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -36,6 +38,7 @@ services:
       - "22181:2181"
 
   kafka:
+    container_name: kafka
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper

@@ -4,6 +4,7 @@ import com.example.demo.calculator.Add;
 import com.example.demo.calculator.AddResponse;
 import com.example.demo.calculator.Calculator;
 import com.example.demo.entities.Department;
+import com.example.demo.exceptions.DepartmentIdNotFound;
 import com.example.demo.repositories.DepartmentRepository;
 import com.example.demo.repositories.PersonRepository;
 import com.example.demo.services.interfaces.DepartmentService;
@@ -37,16 +38,25 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findById(Long id) {
-        return departmentRepository.findById(id).get();
+    public Department findById(Long id) throws DepartmentIdNotFound {
+        if (departmentRepository.findById(id).isPresent()) {
+            return departmentRepository.findById(id).get();
+        } else {
+            throw new DepartmentIdNotFound("Подразделения с таким id не существует!");
+        }
     }
 
     @Override
-    public String getSumMonthSalary(Long id) {
+    public String getSumMonthSalary(Long id) throws DepartmentIdNotFound {
+        int result;
         addResponse.setAddResult(0);
         String shortName;
         if (id != null) {
-            shortName = "подразделения " + departmentRepository.getById(id).getShortName();
+            if (departmentRepository.findById(id).isPresent()) {
+                shortName = "подразделения " + departmentRepository.getById(id).getShortName();
+            } else {
+                throw new DepartmentIdNotFound("Подразделения с таким id не существует!");
+            }
         } else {
             shortName = "всех подразделений ";
         }
@@ -66,8 +76,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                     } else {
                         add.setIntB(0);
                     }
-                    department.setResult(addResponse.getAddResult());
-                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + department.getResult());
+                    result = addResponse.getAddResult();
+                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + result);
                 }
             }
         } else if (departmentRepository.getById(id).getId().equals(1L)) {
@@ -84,8 +94,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                     } else {
                         add.setIntB(0);
                     }
-                    department.setResult(addResponse.getAddResult());
-                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + department.getResult());
+                    result = addResponse.getAddResult();
+                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + result);
                 }
             }
         } else if (departmentRepository.getById(id).getId().equals(2L)) {
@@ -94,7 +104,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 add.setIntA(personRepository.findPersonByDepartmentTwo().get(Math.toIntExact(id)).getMonthSalary());
                 add.setIntB(0);
                 addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB()));
-            } else if (personRepository.findPersonByDepartmentTwo().size()> 1) {
+            } else if (personRepository.findPersonByDepartmentTwo().size() > 1) {
                 id = (long) personRepository.findPersonByDepartmentTwo().size() - 1;
                 for (id = (long) (personRepository.findPersonByDepartmentTwo().size() - 1); id > -1; id--) {
                     add.setIntA(personRepository.findPersonByDepartmentTwo().get(Math.toIntExact(id)).getMonthSalary());
@@ -104,8 +114,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                     } else {
                         add.setIntB(0);
                     }
-                    department.setResult(addResponse.getAddResult());
-                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + department.getResult());
+                    result = addResponse.getAddResult();
+                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + result);
                 }
             }
         } else if (departmentRepository.getById(id).getId().equals(3L)) {
@@ -114,7 +124,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 add.setIntA(personRepository.findPersonByDepartmentThree().get(Math.toIntExact(id)).getMonthSalary());
                 add.setIntB(0);
                 addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB()));
-            } else if (personRepository.findPersonByDepartmentThree().size()> 1) {
+            } else if (personRepository.findPersonByDepartmentThree().size() > 1) {
                 id = (long) personRepository.findPersonByDepartmentThree().size() - 1;
                 for (id = (long) (personRepository.findPersonByDepartmentThree().size() - 1); id > -1; id--) {
                     add.setIntA(personRepository.findPersonByDepartmentThree().get(Math.toIntExact(id)).getMonthSalary());
@@ -124,8 +134,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                     } else {
                         add.setIntB(0);
                     }
-                    department.setResult(addResponse.getAddResult());
-                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + department.getResult());
+                    result = addResponse.getAddResult();
+                    addResponse.setAddResult(addResponse.setAddResult(calculator.getCalculatorSoap().add(add.getIntA(), add.getIntB())) + result);
                 }
             }
         }

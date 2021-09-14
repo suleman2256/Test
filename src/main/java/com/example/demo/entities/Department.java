@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +36,4 @@ public class Department {
     @Column(name = "phone_number")
     @Parameter(description = "Контактные данные подразделения")
     private String phoneNumber;
-
-    private Integer result;
 }
