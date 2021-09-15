@@ -39,7 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department findById(Long id) throws DepartmentIdNotFound {
-        return departmentRepository.findById(id).orElseThrow( () -> new DepartmentIdNotFound(id));
+        return departmentRepository.findById(id).orElseThrow(() -> new DepartmentIdNotFound(id));
     }
 
     @Override

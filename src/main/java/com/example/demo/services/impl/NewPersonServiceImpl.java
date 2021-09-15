@@ -2,7 +2,6 @@ package com.example.demo.services.impl;
 
 import com.example.demo.entities.NewPerson;
 import com.example.demo.repositories.NewPersonRepository;
-import com.example.demo.repositories.PersonRepository;
 import com.example.demo.services.interfaces.NewPersonService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

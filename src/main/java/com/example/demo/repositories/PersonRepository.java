@@ -16,15 +16,15 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findPersonByFirstName(String firstName);
 
     @Query("SELECT p FROM Person p WHERE department.id = 1")
-    List <Person> findPersonByDepartmentOne();
+    List<Person> findPersonByDepartmentOne();
 
     @Query("SELECT p FROM Person p WHERE department.id = 2")
-    List <Person> findPersonByDepartmentTwo();
+    List<Person> findPersonByDepartmentTwo();
 
     @Query("SELECT p FROM Person p WHERE department.id = 3")
-    List <Person> findPersonByDepartmentThree();
+    List<Person> findPersonByDepartmentThree();
 
     @Query("SELECT p from Person p where department.id = 1 or department.id = 2 or  department.id = 3")
-    List <Person> findPersonByDepartmentsAll();
+    List<Person> findPersonByDepartmentsAll();
 
 }

@@ -2,18 +2,14 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.NewPerson;
 import com.example.demo.entities.Person;
-import com.example.demo.exceptions.PersonIdNotFound;
 import com.example.demo.services.interfaces.NewPersonService;
 import com.example.demo.services.interfaces.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 
 import java.util.List;
 
@@ -61,12 +57,10 @@ public class PersonController {
     }
 
     @RequestMapping(value = "persons/findbyfirstname", method = RequestMethod.GET)
-    @Operation(summary ="Поиск сотрудника по имени", description = "Позволяет вывести сотрудника по имени")
+    @Operation(summary = "Поиск сотрудника по имени", description = "Позволяет вывести сотрудника по имени")
     public Person findPersonByFirstName(@RequestParam("firstName") String firstName) {
         return personService.findPersonByFirstName(firstName);
     }
-
-
 
 
 }

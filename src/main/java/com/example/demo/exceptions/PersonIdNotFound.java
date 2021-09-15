@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class PersonIdNotFound extends RuntimeException {
     public PersonIdNotFound(Long id) {
-        super("Сотрудника с id = "+ id + " не существует!");
+        super("Сотрудника с id = " + id + " не существует!");
     }
 }
