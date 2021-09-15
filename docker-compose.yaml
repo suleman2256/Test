@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   db:
+    container_name: db-postgreSQL
     image: 'postgres:12-alpine'
     ports:
       - "5432:5432"
@@ -15,18 +16,16 @@ services:
   app:
     container_name: app
     build:
-      context: services/app
+      context: .
       dockerfile: Dockerfile
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO = update
+      - SPRING_PROFILES_ACTIVE=docker
     image: 'my-java-app'
     ports:
       - "8091:8091"
     depends_on:
       - db
+
 
   zookeeper:
     container_name: zookeeper

@@ -11,20 +11,19 @@ import com.example.demo.services.interfaces.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final Department department;
     private final DepartmentRepository departmentRepository;
     private final AddResponse addResponse;
     private final Add add;
     private final Calculator calculator;
     private final PersonRepository personRepository;
 
-    public DepartmentServiceImpl(Department department, DepartmentRepository departmentRepository, AddResponse addResponse, Add add, Calculator calculator, PersonRepository personRepository) {
-        this.department = department;
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, AddResponse addResponse, Add add, Calculator calculator, PersonRepository personRepository) {
         this.departmentRepository = departmentRepository;
         this.addResponse = addResponse;
         this.add = add;
@@ -49,7 +48,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         String shortName;
         if (id != null) {
             if (departmentRepository.findById(id).isPresent()) {
-                shortName = "подразделения " + departmentRepository.getById(id).getShortName();
+                shortName = "подразделения " + departmentRepository.findById(id).get().getShortName();
             } else {
                 throw new DepartmentIdNotFound(id);
             }

@@ -19,7 +19,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:application.properties")
 @EnableJpaRepositories(basePackages = "com.example.demo.repositories")
 public class JavaConfig {
 

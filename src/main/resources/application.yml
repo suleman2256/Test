@@ -1,0 +1,21 @@
+
+spring:
+  profiles:
+    active:
+      dev
+
+---
+
+spring:
+  profiles:
+    activate:
+      on-profile:
+        dev
+
+---
+
+spring:
+  profiles:
+    activate:
+      on-profile:
+        docker

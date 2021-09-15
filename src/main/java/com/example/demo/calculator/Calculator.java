@@ -1,6 +1,9 @@
 
 package com.example.demo.calculator;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
@@ -16,20 +19,28 @@ import javax.xml.ws.WebServiceException;
  * Generated source version: 2.0
  * 
  */
-@WebServiceClient(name = "Calculator", targetNamespace = "http://tempuri.org/", wsdlLocation = "file:/C:/Projects/simple-spring-crud-app/src/main/resources/wsdl/calcul.wsdl")
+
+@PropertySource("classpath:application.yml")
+@WebServiceClient(name = "Calculator", targetNamespace = "http://tempuri.org/",  wsdlLocation = "${spring.wsdl.location}")
 public class Calculator
     extends Service
 {
 
-    private final static URL CALCULATOR_WSDL_LOCATION;
-    private final static WebServiceException CALCULATOR_EXCEPTION;
+    @Value("${spring.wsdl.location}")
+    private static final URL CALCULATOR_WSDL_LOCATION;
+
+    private static final WebServiceException CALCULATOR_EXCEPTION;
     private final static QName CALCULATOR_QNAME = new QName("http://tempuri.org/", "Calculator");
+
+    @Value("${spring.wsdl.location}")
+    private static String wsdlLocation;
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Projects/simple-spring-crud-app/src/main/resources/wsdl/calcul.wsdl");
+            assert false;
+            url = new URL(wsdlLocation);
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
