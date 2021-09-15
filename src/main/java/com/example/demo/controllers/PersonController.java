@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.NewPerson;
 import com.example.demo.entities.Person;
+import com.example.demo.exceptions.PersonIdNotFound;
 import com.example.demo.services.interfaces.NewPersonService;
 import com.example.demo.services.interfaces.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
 import java.util.List;
@@ -40,15 +42,15 @@ public class PersonController {
         return person;
     }
 
-    @GetMapping("persons")
+    @RequestMapping(value = "persons", method = RequestMethod.GET)
     @Operation(summary = "Все сотрудники", description = "Позволяет вывести всех сотрудников")
     public List<Person> findAllPerson() {
         return personService.findAllPerson();
     }
 
-    @GetMapping("persons/{id}")
+    @RequestMapping(value = "persons/{id}", method = RequestMethod.GET)
     @Operation(summary = "Получение сотрудника", description = "Позволяет вывести сотрудника по его id")
-    public Person findPersonById(@PathVariable("id") Long id) {
+    public Person findPersonById(@RequestParam("id") Long id) {
         return personService.findById(id);
     }
 

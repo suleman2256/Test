@@ -1,7 +1,11 @@
 package com.example.demo.exceptions;
 
-public class PersonIdNotFound extends Exception {
-    public PersonIdNotFound(String message) {
-        super(message);
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class PersonIdNotFound extends RuntimeException {
+    public PersonIdNotFound(Long id) {
+        super("Сотрудника с id = "+ id + " не существует!");
     }
 }

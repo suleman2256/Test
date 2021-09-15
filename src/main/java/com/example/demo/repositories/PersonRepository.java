@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    Person findPersonByLastName(String lastName);
+    Optional<Person> findPersonByLastName(String lastName);
 
-    Person findPersonByFirstName(String firstName);
+    Optional<Person> findPersonByFirstName(String firstName);
 
     @Query("SELECT p FROM Person p WHERE department.id = 1")
     List <Person> findPersonByDepartmentOne();

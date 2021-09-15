@@ -29,14 +29,8 @@ public class DepartmentController {
 
     @Operation(summary = "Получить подразделение", description = "Позволяет вывести конкретное подразделение по его id")
     @RequestMapping(value = "departments/{id}", method = RequestMethod.GET)
-    public ResponseEntity findDepartmentsById(@RequestParam Long id) {
-        try {
-            return ResponseEntity.ok(departmentService.findById(id));
-        } catch (DepartmentIdNotFound e) {
-            return ResponseEntity.status(404).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error");
-        }
+    public Department findDepartmentsById(@RequestParam Long id) throws DepartmentIdNotFound {
+        return departmentService.findById(id);
     }
 
     @Operation(summary = "Получить расчёт месячных расходов", description = "Позволяет вывести расчёт месячных расчётов по всем или каждому подразделению")

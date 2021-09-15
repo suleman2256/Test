@@ -1,6 +1,5 @@
 package com.example.demo.services.interfaces;
 
-import com.example.demo.entities.NewPerson;
 import com.example.demo.entities.Person;
 import org.springframework.stereotype.Service;
 

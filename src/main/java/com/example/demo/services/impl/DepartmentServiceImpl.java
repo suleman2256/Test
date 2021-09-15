@@ -39,11 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department findById(Long id) throws DepartmentIdNotFound {
-        if (departmentRepository.findById(id).isPresent()) {
-            return departmentRepository.findById(id).get();
-        } else {
-            throw new DepartmentIdNotFound("Подразделения с таким id не существует!");
-        }
+        return departmentRepository.findById(id).orElseThrow( () -> new DepartmentIdNotFound(id));
     }
 
     @Override
@@ -55,7 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             if (departmentRepository.findById(id).isPresent()) {
                 shortName = "подразделения " + departmentRepository.getById(id).getShortName();
             } else {
-                throw new DepartmentIdNotFound("Подразделения с таким id не существует!");
+                throw new DepartmentIdNotFound(id);
             }
         } else {
             shortName = "всех подразделений ";
