@@ -6,9 +6,6 @@ server:
 
 spring:
 
-  wsdl:
-    location: file:/C:/Projects/simple-spring-crud-app/src/main/resources/wsdl/calcul.wsdl
-
   #Liquibase
   liquibase:
     change-log: classpath:changelog/db.changelog-master.yml

@@ -5,9 +5,9 @@ ENV JAVA_PARAM=$JAVA_PARAM
 
 WORKDIR /opt/app
 
-COPY src/main/resources/ /opt/app
+COPY /src/main/resources/ /opt/app
 
-COPY /target/*.jar /opt/app/app.jar
+COPY ../../target/*.jar /opt/app/app.jar
 
 EXPOSE 8091
 

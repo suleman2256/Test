@@ -17,7 +17,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: /env/docker/app/Dockerfile
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     image: 'my-java-app'
