@@ -1,9 +1,9 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.entities.Person;
-import com.example.demo.exceptions.PersonFirstNameNotFound;
-import com.example.demo.exceptions.PersonIdNotFound;
-import com.example.demo.exceptions.PersonLastNameNotFound;
+import com.example.demo.exceptions.PersonFirstNameNotFoundException;
+import com.example.demo.exceptions.PersonIdNotFoundException;
+import com.example.demo.exceptions.PersonLastNameNotFoundException;
 import com.example.demo.repositories.PersonRepository;
 import com.example.demo.services.interfaces.PersonService;
 import org.springframework.stereotype.Service;
@@ -26,17 +26,17 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person findPersonByLastName(String lastName) {
-        return personRepository.findPersonByLastName(lastName).orElseThrow(() -> new PersonLastNameNotFound(lastName));
+        return personRepository.findPersonByLastName(lastName).orElseThrow(() -> new PersonLastNameNotFoundException(lastName));
     }
 
     @Override
     public Person findById(Long id) {
-        return personRepository.findById(id).orElseThrow(() -> new PersonIdNotFound(id));
+        return personRepository.findById(id).orElseThrow(() -> new PersonIdNotFoundException(id));
     }
 
     @Override
     public Person findPersonByFirstName(String firstName) {
-        return personRepository.findPersonByFirstName(firstName).orElseThrow(() -> new PersonFirstNameNotFound(firstName));
+        return personRepository.findPersonByFirstName(firstName).orElseThrow(() -> new PersonFirstNameNotFoundException(firstName));
     }
 
     @Override

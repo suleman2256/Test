@@ -4,14 +4,13 @@ import com.example.demo.calculator.Add;
 import com.example.demo.calculator.AddResponse;
 import com.example.demo.calculator.Calculator;
 import com.example.demo.entities.Department;
-import com.example.demo.exceptions.DepartmentIdNotFound;
+import com.example.demo.exceptions.DepartmentIdNotFoundException;
 import com.example.demo.repositories.DepartmentRepository;
 import com.example.demo.repositories.PersonRepository;
 import com.example.demo.services.interfaces.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Service
@@ -37,12 +36,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findById(Long id) throws DepartmentIdNotFound {
-        return departmentRepository.findById(id).orElseThrow(() -> new DepartmentIdNotFound(id));
+    public Department findById(Long id) throws DepartmentIdNotFoundException {
+        return departmentRepository.findById(id).orElseThrow(() -> new DepartmentIdNotFoundException(id));
     }
 
     @Override
-    public String getSumMonthSalary(Long id) throws DepartmentIdNotFound {
+    public String getSumMonthSalary(Long id) throws DepartmentIdNotFoundException {
         int result;
         addResponse.setAddResult(0);
         String shortName;
@@ -50,7 +49,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             if (departmentRepository.findById(id).isPresent()) {
                 shortName = "подразделения " + departmentRepository.findById(id).get().getShortName();
             } else {
-                throw new DepartmentIdNotFound(id);
+                throw new DepartmentIdNotFoundException(id);
             }
         } else {
             shortName = "всех подразделений ";

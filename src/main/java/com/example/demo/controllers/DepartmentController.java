@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Department;
-import com.example.demo.exceptions.DepartmentIdNotFound;
+import com.example.demo.exceptions.DepartmentIdNotFoundException;
 import com.example.demo.services.interfaces.DepartmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +32,7 @@ public class DepartmentController {
 
     @Operation(summary = "Получить подразделение", description = "Позволяет вывести конкретное подразделение по его id")
     @RequestMapping(value = "departments/{id}", method = RequestMethod.GET)
-    public Department findDepartmentsById(@RequestParam Long id) throws DepartmentIdNotFound {
+    public Department findDepartmentsById(@RequestParam Long id) throws DepartmentIdNotFoundException {
         return departmentService.findById(id);
     }
 
@@ -42,7 +42,7 @@ public class DepartmentController {
         try {
             String sumMonthSalary = departmentService.getSumMonthSalary(id);
             return ResponseEntity.ok(sumMonthSalary);
-        } catch (DepartmentIdNotFound e) {
+        } catch (DepartmentIdNotFoundException e) {
             return ResponseEntity.status(404).body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error");

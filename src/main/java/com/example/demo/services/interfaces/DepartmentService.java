@@ -1,7 +1,7 @@
 package com.example.demo.services.interfaces;
 
 import com.example.demo.entities.Department;
-import com.example.demo.exceptions.DepartmentIdNotFound;
+import com.example.demo.exceptions.DepartmentIdNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface DepartmentService {
 
     List<Department> findDepartmentAll();
 
-    Department findById(Long id) throws DepartmentIdNotFound;
+    Department findById(Long id) throws DepartmentIdNotFoundException;
 
-    String getSumMonthSalary(Long id) throws DepartmentIdNotFound;
+    String getSumMonthSalary(Long id) throws DepartmentIdNotFoundException;
 }

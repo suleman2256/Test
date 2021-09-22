@@ -33,9 +33,9 @@ public class Person {
     @Parameter(description = "Фамилия сотрудника", name = "Фамилия сотрудника")
     private String lastName;
 
-    @Column(name = "patronymic")
+    @Column(name = "middle_name")
     @Parameter(description = "Отчество сотрудника")
-    private String patronymic;
+    private String middleName;
 
     @Column(name = "date")
     @Parameter(description = "Дата рождения сотрудника", name = "Дата рождения сотрудника")

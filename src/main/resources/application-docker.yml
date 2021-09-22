@@ -5,6 +5,7 @@ server:
     include-message: always
 
 spring:
+
   #Liquibase
   liquibase:
     change-log: classpath:changelog/db.changelog-master.yml

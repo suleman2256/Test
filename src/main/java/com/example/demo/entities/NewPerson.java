@@ -33,15 +33,15 @@ public class NewPerson {
     @Parameter(description = "Фамилия сотрудника")
     private String lastName;
 
-    @Column(name = "patronymic")
+    @Column(name = "middle_name")
     @Parameter(description = "Отчество сотрудника")
-    private String patronymic;
+    private String middleName;
 
     @Column(name = "date")
     @Parameter(description = "Дата рождения сотрудника")
     private LocalDate date;
 
-    @Column(name = "Month_Salary")
+    @Column(name = "month_Salary")
     @Parameter(description = "Зарплата в месяц")
     private int monthSalary;
 

@@ -4,6 +4,8 @@ import com.example.demo.entities.NewPerson;
 import com.example.demo.entities.Person;
 import com.example.demo.services.interfaces.NewPersonService;
 import com.example.demo.services.interfaces.PersonService;
+import com.example.demo.util.PersonsPDF;
+import com.example.demo.util.PersonsXls;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -62,5 +69,37 @@ public class PersonController {
         return personService.findPersonByFirstName(firstName);
     }
 
+    @RequestMapping(value = "persons/pdf", method = RequestMethod.POST, produces = MediaType.APPLICATION_PDF_VALUE)
+    @Operation(summary = "Список сотрудников в PDF", description = "Позволяет получить список сотрудникв в PDF формате")
+    public void getPdf(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
 
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Persons_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Person> personList = personService.findAllPerson();
+
+        PersonsPDF personsPDF = new PersonsPDF(personList);
+        personsPDF.export(response);
+    }
+
+    @RequestMapping(value = "persons/xls", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
+    @Operation(summary = "Список сотрудников в Excel", description = "Позволяет получить список сотрудникв в Excel формате")
+    public void getXls(HttpServletResponse response) throws IOException {
+        response.setContentType("application/xlsx");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Persons_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Person> personList = personService.findAllPerson();
+
+        PersonsXls personsXls = new PersonsXls(personList);
+        personsXls.export(response);
+    }
 }
