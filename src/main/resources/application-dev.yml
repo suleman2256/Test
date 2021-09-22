@@ -43,3 +43,12 @@ spring:
       group-id: producerServer
     producer:
       client-id: consumerServer
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
