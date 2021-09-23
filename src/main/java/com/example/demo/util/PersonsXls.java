@@ -8,15 +8,15 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 public class PersonsXls {
-    private XSSFWorkbook workbook;
+    private final XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<Person> personList;
+    private final List<Person> personList;
 
     public PersonsXls(List<Person> personList) {
         this.personList = personList;
@@ -80,7 +80,7 @@ public class PersonsXls {
         writeHeaderLine();
         writeDataLines();
 
-        ServletOutputStream outputStream = response.getOutputStream();
+        OutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
         workbook.close();
 
