@@ -14,6 +14,8 @@ WORKDIR /opt/app
 
 COPY /src/main/resources /opt/app
 
+RUN apk add ttf-dejavu
+
 COPY --from=build /usr/src/myapp/target/*.jar /opt/app/app.jar
 
 EXPOSE 8091
