@@ -4,6 +4,9 @@ server:
   error:
     include-message: always
 
+report:
+  file: "templates/Persons_Template.jrxml"
+
 spring:
 
   #Liquibase

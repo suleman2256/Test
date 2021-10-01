@@ -4,8 +4,10 @@ server:
   error:
     include-message: always
 
-spring:
+report:
+  file: "src/main/resources/templates/Persons_Template.jrxml"
 
+spring:
   #Liquibase
   liquibase:
     change-log: classpath:changelog/db.changelog-master.yml
